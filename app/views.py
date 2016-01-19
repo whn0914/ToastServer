@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-  
-from flask import jsonify
+from flask import request, jsonify
 from app import app, db
 from models import Toast, ToastUser
 from response import Response
@@ -18,13 +18,13 @@ def add_user():
 	db.session.commit()
 	return jsonify(Response.success(msg="插入成功", data=user.id))
 
+# 添加吐槽
+@app.route('/toast')
+def toast():
+	uid = request.args.get('uid')
+	body = request.args.get('body')
+	toast = Toast(uid, body, datetime.now(), 0, 0)
+	db.session.add(toast)
+	db.session.commit()
+	return jsonify(Response.success(msg="吐槽成功"))
 
-@app.route('/toasts/')
-def list_toasts():
-    toasts = Toast.query.all()
-    dic= {}
-    for t in toasts:  
-       dic = {"uid":t.uid, "body":t.body, "time":t.creation_time.strftime("%Y-%m-%d %H:%M:%S")}
-       print t.body
-       print jsonify(dic)
-    return jsonify(Response.success(msg="成功啦", data=dic))
