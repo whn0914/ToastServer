@@ -1,0 +1,7 @@
+# 排除venv目录和migrations目录
+venv/*
+migrations/*
+
+# 排除.pyc文件
+*.pyc
+
