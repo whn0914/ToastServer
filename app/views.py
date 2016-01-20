@@ -75,7 +75,7 @@ def trumpet():
 	# 让记录+1
 	toast = Toast.query.filter_by(id=toast_id).first()
 	if toast is not None:
-		toast.trumpet_count = toast + 1
+		toast.trumpet_count += 1
 		db.session.commit()
 	else:
 		return jsonify(Response.fail(msg="找不到这条toast"))
@@ -92,7 +92,7 @@ def shit():
 	# 让记录+1
 	toast = Toast.query.filter_by(id=toast_id).first()
 	if toast is not None:
-		toast.shit_count = toast + 1
+		toast.shit_count += 1
 		db.session.commit()
 	else:
 		return jsonify(Response.fail(msg="找不到这条toast"))
@@ -102,5 +102,12 @@ def shit():
 @app.route('/getToast')
 def getToast():
 	toast_id = int(request.args.get('toastId'))
-	toast = Toast.query.get(toast_id)
-	return jsonify(Response.success(msg="拉取成功", data=toast))
+	item = Toast.query.get(toast_id)
+	res = {	
+			"toast_id":item.id,
+			"body":item.body, 
+			"time":item.creation_time, 
+			"trumpet_count":item.trumpet_count,
+			"shit_count":item.shit_count
+		}
+	return jsonify(Response.success(msg="拉取成功", data=res))
