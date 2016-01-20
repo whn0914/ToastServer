@@ -7,14 +7,14 @@ class Toast(db.Model):
 	uid = db.Column(db.Integer)
 	body = db.Column(db.String(512))
 	creation_time = db.Column(db.DateTime)
-	thrumpet_count = db.Column(db.Integer)
+	trumpet_count = db.Column(db.Integer)
 	shit_count = db.Column(db.Integer)
 
-	def __init__(self, uid, body, creation_time, thrumpet_count, shit_count):
+	def __init__(self, uid, body, creation_time, trumpet_count, shit_count):
 		self.uid = uid
 		self.body = body
 		self.creation_time = creation_time
-		self.thrumpet_count = thrumpet_count
+		self.trumpet_count = trumpet_count
 		self.shit_count = shit_count
 
 class ToastUser(db.Model):
