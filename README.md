@@ -24,13 +24,11 @@
 ```
 
    
-本项目遵从 MIT 协议
+*本项目遵从 MIT 协议*
 
 
 
 
-Designed & Developed by
-
-Shu Zhang
-
+Designed & Developed by  
+Shu Zhang  
 Haonan Wu
