@@ -35,6 +35,7 @@ ITEMS_PER_PAGE = 20
 @app.route('/listToasts')
 def list_toasts():
 	page = int(request.args.get('page'))
+	uid = int(request.args.get('uid'))
 	paginate = Toast.query.order_by(Toast.creation_time.desc()).paginate(page, ITEMS_PER_PAGE, False)
 	toast_list = paginate.items
 	res = []
@@ -48,8 +49,7 @@ def list_toasts():
 						"trumpet":0,
 						"shit":0
 					}
-
-		uid = item.uid
+					
 		toast_operation_list = ToastOperation.query.filter_by(uid=uid).filter_by(toast_id=item.id).all()
 		for operation in toast_operation_list:
 			if operation.type == 0:
@@ -73,7 +73,7 @@ def trumpet():
 	db.session.add(trumpet_operation)
 	db.session.commit()
 	# 让记录+1
-	toast = Toast.query.filter_by(id=toast_id).first()
+	toast = Toast.query.get(toast_id)
 	if toast is not None:
 		toast.trumpet_count += 1
 		db.session.commit()
@@ -90,7 +90,7 @@ def shit():
 	db.session.add(shit_operation)
 	db.session.commit()
 	# 让记录+1
-	toast = Toast.query.filter_by(id=toast_id).first()
+	toast = Toast.query.get(toast_id)
 	if toast is not None:
 		toast.shit_count += 1
 		db.session.commit()
@@ -103,11 +103,14 @@ def shit():
 def getToast():
 	toast_id = int(request.args.get('toastId'))
 	item = Toast.query.get(toast_id)
-	res = {	
-			"toast_id":item.id,
-			"body":item.body, 
-			"time":item.creation_time, 
-			"trumpet_count":item.trumpet_count,
-			"shit_count":item.shit_count
-		}
-	return jsonify(Response.success(msg="拉取成功", data=res))
+	if item is not None:
+		res = {	
+				"toast_id":item.id,
+				"body":item.body, 
+				"time":item.creation_time.strftime("%Y-%m-%d %H:%M:%S"), 
+				"trumpet_count":item.trumpet_count,
+				"shit_count":item.shit_count
+			}
+		return jsonify(Response.success(msg="拉取成功", data=res))
+	else:
+		return jsonify(Response.fail(msg="找不到这条toast"))
