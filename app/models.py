@@ -37,4 +37,16 @@ class ToastOperation(db.Model):
 		self.type = type
 		self.creation_time = creation_time
 		
+class Scanner(db.Model):
+	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+	name = db.Column(db.String(256))
+	phone = db.Column(db.String(20))
+	position = db.Column(db.String(256))
+	valid = db.Column(db.Integer)
+	
+	def __init__(self, name, phone, position):
+		self.name = name
+		self.phone = phone
+		self.position = position
+		self.valid = 1
 		

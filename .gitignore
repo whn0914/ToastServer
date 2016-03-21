@@ -8,4 +8,7 @@ migrations/*
 # 排除config.py文件
 config.py
 
+# 排除run.py文件
+run.py
+
 .DS_Store

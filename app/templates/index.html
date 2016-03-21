@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>二维码生成器</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+    <script type="text/javascript" src="../static/js/jquery-1.12.1.min.js"></script>
+	<script type="text/javascript" src="../static/js/index.js"></script>
+	<script type="text/javascript" src="../static/js/jquery.qrcode.min.js"></script>
+  </head>
+  <body>
+  	<div class="navi">
+  		<div class="navi-content">© 旅居星球 提供技术支持</div>
+  	</div>
+    <div id="content">
+    	<div class="info">
+    		<form class="info-form" id="info-form">
+    			<div class="input-line">
+    				<input class="form-field" id="name" type="text" name="name" placeholder="姓名"></input>
+    			</div>
+    			<div class="input-line">
+    				<input class="form-field" id="phone" type="text" name="phone" placeholder="电话"></input>
+    			</div>
+    			<div class="input-line">
+    				<input class="form-field" id="position" type="text" name="position" placeholder="职位"></input>
+    			</div>
+    			<div class="input-line">
+    				<input id="insertInfo" type="button" value="生成二维码"></input>
+    			</div>
+    		</form>
+    	</div>
+    	<div class="qrcode" id="qrcode"></div>
+    </div>
+	
+  </body>
+</html>
